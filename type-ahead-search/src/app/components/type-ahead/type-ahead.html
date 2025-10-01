@@ -1,1 +1,12 @@
 <p>type-ahead works!</p>
+<h2>Wikipedia Search</h2>
+<input type="text" [formControl]="searchInput" placeholder="Input here..." class="search-input" />
+
+<ul *ngIf="searchResults$ | async as results" class="results-list">
+  <li *ngIf="results.length === 0 && searchInput.value" class="result-item">No results found.</li>
+
+  <li *ngFor="let result of results" class="result-item">
+    <h3 class="result-title">{{ result.title }}</h3>
+    <p class="result-snippet" [innerHTML]="result.snippet"></p>
+  </li>
+</ul>
