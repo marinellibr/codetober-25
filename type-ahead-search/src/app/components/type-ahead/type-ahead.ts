@@ -11,6 +11,8 @@ import {
   tap,
 } from 'rxjs';
 import { Wikipedia } from '../../services/wikipedia';
+import { Router } from '@angular/router';
+import { WikipediaResponse, WikipediaSearchResult } from '../../models/wikipedia.model';
 
 @Component({
   selector: 'app-type-ahead',
@@ -25,6 +27,7 @@ export class TypeAhead {
   isLoading = false;
 
   private wikipediaService = inject(Wikipedia);
+  private router = inject(Router);
 
   constructor() {
     this.searchResults$ = this.searchInput.valueChanges.pipe(
@@ -46,5 +49,9 @@ export class TypeAhead {
 
       tap(() => (this.isLoading = false))
     );
+  }
+
+  redirect(selectedArticle: WikipediaSearchResult) {
+    window.open(`http://en.wikipedia.org/wiki?curid=${selectedArticle.pageid}`, '_blank');
   }
 }

@@ -1,9 +1,11 @@
 export interface WikipediaResponse {
   query: {
-    search: {
-      title: string;
-      snippet: string;
-      pageid: number;
-    }[];
+    search: WikipediaSearchResult[];
   };
+}
+
+export interface WikipediaSearchResult {
+  title: string;
+  snippet: string;
+  pageid: number;
 }

@@ -16,7 +16,7 @@
       } @if (searchResults$ | async; as searchResults) { @if (searchResults.length > 0) {
       <ul class="results-list">
         @for (result of searchResults; track result.pageid) {
-        <li class="result-item">
+        <li class="result-item" (click)="redirect(result)">
           <h3 class="result-title">{{ result.title }}</h3>
           <p class="result-snippet" [innerHTML]="result.snippet + '...'"></p>
         </li>
