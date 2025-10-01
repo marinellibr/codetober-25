@@ -16,11 +16,22 @@
         <div class="task-card" *ngFor="let task of column.tasks" cdkDrag>
           {{ task.text }}
         </div>
+
+        <div class="task-card add" *ngIf="i === 0">
+          <!-- <ng-container *ngIf="!isAddingCard" (click)="toggleAddCard()">
+            + Add new card</ng-container
+          > -->
+          <form [formGroup]="addColumnForm" (ngSubmit)="addColumn()">
+            <input type="text" placeholder="Enter card text..." formControlName="title" autofocus />
+
+            <button type="submit" class="confirm-btn" [disabled]="addColumnForm.invalid">+</button>
+          </form>
+        </div>
       </div>
     </div>
 
     <div class="column add-column">
-      <div *ngIf="isAdding" class="add-column-form">
+      <div *ngIf="isAddingColumn" class="add-column-form">
         <form [formGroup]="addColumnForm" (ngSubmit)="addColumn()">
           <input type="text" placeholder="Enter column name..." formControlName="title" autofocus />
           <div class="form-buttons">
@@ -32,7 +43,9 @@
         </form>
       </div>
 
-      <button *ngIf="!isAdding" class="add-btn" (click)="toggleForm()">+ Add another column</button>
+      <button *ngIf="!isAddingColumn" class="add-btn" (click)="toggleForm()">
+        + Add another column
+      </button>
     </div>
   </div>
 </div>

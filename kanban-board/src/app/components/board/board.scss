@@ -69,6 +69,15 @@
   box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
   cursor: grab;
   font-size: 14px;
+
+  &.add {
+    border: 2px dashed #1a2601;
+    cursor: pointer;
+
+    input {
+      width: calc(100% - 24px);
+    }
+  }
 }
 
 .cdk-drag-placeholder {

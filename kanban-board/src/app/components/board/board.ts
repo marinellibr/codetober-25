@@ -19,12 +19,18 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class Board {
   columns: Column[] = JSON.parse(JSON.stringify(KANBAN_MOCK_DATA));
-  isAdding: boolean = false;
+  isAddingColumn: boolean = false;
+  isAddingCard: boolean = false;
   addColumnForm: FormGroup;
+  addCardForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.addColumnForm = this.fb.group({
       title: ['', Validators.required],
+    });
+
+    this.addCardForm = this.fb.group({
+      card: ['', Validators.required],
     });
   }
 
@@ -42,7 +48,25 @@ export class Board {
   }
 
   toggleForm() {
-    this.isAdding = !this.isAdding;
+    this.isAddingColumn = !this.isAddingColumn;
+  }
+
+  toggleAddCard() {
+    console.log('toggleAddCard called');
+    this.isAddingCard = !this.isAddingCard;
+  }
+
+  addCard() {
+    if (this.addColumnForm.valid) {
+      const newColumn: Column = {
+        id: `col-${this.columns.length + 1}`,
+        title: this.addColumnForm.value.title.trim(),
+        tasks: [],
+      };
+      this.columns.push(newColumn);
+    }
+
+    this.cancelAddColumn();
   }
 
   addColumn() {
