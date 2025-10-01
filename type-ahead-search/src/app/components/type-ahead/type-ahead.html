@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>Wikipedia Search</h2>
+  <div class="search-bar merriweather-font">
+    <input
+      type="text"
+      [formControl]="searchInput"
+      placeholder="Input here..."
+      class="search-input merriweather-font"
+    />
+
+    <div class="response">
+      @if (isLoading){
+      <div class="loader">
+        <img src="https://www.svgrepo.com/show/489029/loading-2.svg" alt="" />
+      </div>
+      } @if (searchResults$ | async; as searchResults) { @if (searchResults.length > 0) {
+      <ul class="results-list">
+        @for (result of searchResults; track result.pageid) {
+        <li class="result-item" (click)="redirect(result)">
+          <h3 class="result-title">{{ result.title }}</h3>
+          <p class="result-snippet" [innerHTML]="result.snippet + '...'"></p>
+        </li>
+        }
+      </ul>
+      } @else { @if (searchInput.value) {
+      <ul class="results-list">
+        <li class="result-item no-results">No results found.</li>
+      </ul>
+      } } }
+    </div>
+  </div>
+</div>
