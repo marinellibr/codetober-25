@@ -1,13 +1,17 @@
 <h2>Wikipedia Search</h2>
 <input type="text" [formControl]="searchInput" placeholder="Input here..." class="search-input" />
 
-<div *ngIf="isLoading" class="loader">Loading...</div>
-
-<ul *ngIf="searchResults$ | async as results" class="results-list">
-  <li *ngIf="results.length === 0 && searchInput.value" class="result-item">No results found.</li>
-
-  <li *ngFor="let result of results" class="result-item">
+@if (isLoading){
+<div class="loader">Loading...</div>
+} @if (searchResults$ | async; as searchResults) {
+<ul class="results-list">
+  @for (result of searchResults; track result.pageid) {
+  <li class="result-item">
     <h3 class="result-title">{{ result.title }}</h3>
     <p class="result-snippet" [innerHTML]="result.snippet"></p>
   </li>
+  } @empty { @if (searchInput.value) {
+  <li class="result-item">No results found.</li>
+  } }
 </ul>
+}
