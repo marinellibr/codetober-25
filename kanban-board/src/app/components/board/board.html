@@ -1,1 +1,27 @@
 <p>board works!</p>
+<div class="board-container">
+  <div class="board" cdkDropListGroup>
+    <div class="column" *ngFor="let column of columns; let i = index">
+      <div class="column-header">
+        <h3>{{ column.title }}</h3>
+        <button class="delete-btn" (click)="deleteColumn(i)">&times;</button>
+      </div>
+
+      <div
+        class="task-list"
+        [id]="column.id"
+        cdkDropList
+        [cdkDropListData]="column.tasks"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="task-card" *ngFor="let task of column.tasks" cdkDrag>
+          {{ task.text }}
+        </div>
+      </div>
+    </div>
+
+    <div class="column add-column">
+      <button class="add-btn" (click)="addColumn()">+ Add another column</button>
+    </div>
+  </div>
+</div>
