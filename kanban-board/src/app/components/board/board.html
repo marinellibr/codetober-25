@@ -1,4 +1,3 @@
-<p>board works!</p>
 <div class="board-container">
   <div class="board" cdkDropListGroup>
     <div class="column" *ngFor="let column of columns; let i = index">
@@ -21,7 +20,19 @@
     </div>
 
     <div class="column add-column">
-      <button class="add-btn" (click)="addColumn()">+ Add another column</button>
+      <div *ngIf="isAdding" class="add-column-form">
+        <form [formGroup]="addColumnForm" (ngSubmit)="addColumn()">
+          <input type="text" placeholder="Enter column name..." formControlName="title" autofocus />
+          <div class="form-buttons">
+            <button type="submit" class="confirm-btn" [disabled]="addColumnForm.invalid">
+              Add Column
+            </button>
+            <button type="button" class="cancel-btn" (click)="cancelAddColumn()">&times;</button>
+          </div>
+        </form>
+      </div>
+
+      <button *ngIf="!isAdding" class="add-btn" (click)="toggleForm()">+ Add another column</button>
     </div>
   </div>
 </div>

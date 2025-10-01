@@ -8,16 +8,25 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule, DragDropModule, ReactiveFormsModule],
   templateUrl: './board.html',
   styleUrl: './board.scss',
   standalone: true,
 })
 export class Board {
   columns: Column[] = JSON.parse(JSON.stringify(KANBAN_MOCK_DATA));
+  isAdding: boolean = false;
+  addColumnForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.addColumnForm = this.fb.group({
+      title: ['', Validators.required],
+    });
+  }
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
@@ -32,16 +41,26 @@ export class Board {
     }
   }
 
+  toggleForm() {
+    this.isAdding = !this.isAdding;
+  }
+
   addColumn() {
-    const newColumnName = prompt('Enter column name:');
-    if (newColumnName) {
+    if (this.addColumnForm.valid) {
       const newColumn: Column = {
         id: `col-${this.columns.length + 1}`,
-        title: newColumnName,
+        title: this.addColumnForm.value.title.trim(),
         tasks: [],
       };
       this.columns.push(newColumn);
     }
+
+    this.cancelAddColumn();
+  }
+
+  cancelAddColumn() {
+    this.toggleForm();
+    this.addColumnForm.reset();
   }
 
   deleteColumn(columnIndex: number) {

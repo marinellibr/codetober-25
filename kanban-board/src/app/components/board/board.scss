@@ -100,3 +100,54 @@
     }
   }
 }
+
+.add-column-form {
+  background: #f4f5f7;
+  padding: 8px;
+  border-radius: 6px;
+
+  input {
+    width: 100%;
+    border: 2px solid #0079bf;
+    border-radius: 3px;
+    padding: 8px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+  }
+
+  .form-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .confirm-btn {
+      background-color: #0079bf;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 8px 12px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #026aa7;
+      }
+
+      &:disabled {
+        background-color: #a5a9b3;
+        cursor: not-allowed;
+      }
+    }
+
+    .cancel-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #6b778c;
+
+      &:hover {
+        color: #172b4d;
+      }
+    }
+  }
+}
