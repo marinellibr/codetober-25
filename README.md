@@ -13,6 +13,17 @@ For the first day of Codetober, I built a highly efficient type-ahead search com
 - **`switchMap`**: Cancels previous pending API requests to prevent race conditions and ensure only the latest results are displayed.
 - **`async` pipe**: For clean, declarative subscription management in the template.
 
+## Day 02: [Draggable Kanban Board](https://github.com/marinellibr/codetober-25/tree/day-02/kanban-board)
+
+For the second day of Codetober, I built a fully interactive Kanban board from scratch. This project demonstrates the implementation of a complex, stateful UI featuring drag-and-drop functionality for tasks both within and between columns, as well as the ability to dynamically create and delete columns. The primary focus was on leveraging the Angular CDK's powerful Drag & Drop module to create a seamless and intuitive user experience.
+
+**Key concepts demonstrated:**
+
+- **Angular CDK Drag & Drop Module**: Utilizing this advanced toolkit to create a rich, interactive user interface for complex data manipulation.
+- **`cdkDropListGroup`**: Connecting multiple drop zones (the columns) to enable the seamless transfer of items from one list to another.
+- **`CdkDragDrop` Event Handling**: Implementing the core logic that responds to drop events, differentiating between reordering with `moveItemInArray` and transferring with `transferArrayItem`.
+- **Dynamic State & Template Synchronization**: Managing the component's state (the array of columns and tasks) to dynamically add, remove, and reorder elements, with the UI reactively updating in response to these data changes.
+
 ---
 
 ### A Note on the Development Process
