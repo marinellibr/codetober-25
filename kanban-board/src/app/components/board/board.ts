@@ -48,25 +48,24 @@ export class Board {
   }
 
   toggleForm() {
+    this.addColumnForm.reset();
     this.isAddingColumn = !this.isAddingColumn;
   }
 
   toggleAddCard() {
-    console.log('toggleAddCard called');
+    this.addCardForm.reset();
     this.isAddingCard = !this.isAddingCard;
   }
 
-  addCard() {
-    if (this.addColumnForm.valid) {
-      const newColumn: Column = {
-        id: `col-${this.columns.length + 1}`,
-        title: this.addColumnForm.value.title.trim(),
-        tasks: [],
+  addCard(index: number) {
+    if (this.addCardForm.valid) {
+      const newCard: Task = {
+        id: `task-${this.columns[index].tasks.length + 1}`,
+        text: this.addCardForm.value.card.trim(),
       };
-      this.columns.push(newColumn);
+      this.columns[index].tasks.push(newCard);
     }
-
-    this.cancelAddColumn();
+    this.toggleAddCard();
   }
 
   addColumn() {
@@ -79,12 +78,7 @@ export class Board {
       this.columns.push(newColumn);
     }
 
-    this.cancelAddColumn();
-  }
-
-  cancelAddColumn() {
     this.toggleForm();
-    this.addColumnForm.reset();
   }
 
   deleteColumn(columnIndex: number) {

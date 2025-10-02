@@ -18,13 +18,16 @@
         </div>
 
         <div class="task-card add" *ngIf="i === 0">
-          <!-- <ng-container *ngIf="!isAddingCard" (click)="toggleAddCard()">
-            + Add new card</ng-container
-          > -->
-          <form [formGroup]="addColumnForm" (ngSubmit)="addColumn()">
-            <input type="text" placeholder="Enter card text..." formControlName="title" autofocus />
+          <form [formGroup]="addCardForm" (ngSubmit)="addCard(i)">
+            <input type="text" placeholder="Add a new card..." formControlName="card" autofocus />
 
-            <button type="submit" class="confirm-btn" [disabled]="addColumnForm.invalid">+</button>
+            <button class="confirm-btn" [disabled]="addCardForm.invalid" (click)="toggleAddCard()">
+              &times;
+            </button>
+
+            <button type="submit" class="confirm-btn" [disabled]="addCardForm.invalid">
+              &plus;
+            </button>
           </form>
         </div>
       </div>
@@ -38,7 +41,7 @@
             <button type="submit" class="confirm-btn" [disabled]="addColumnForm.invalid">
               Add Column
             </button>
-            <button type="button" class="cancel-btn" (click)="cancelAddColumn()">&times;</button>
+            <button type="button" class="cancel-btn" (click)="toggleForm()">&times;</button>
           </div>
         </form>
       </div>
